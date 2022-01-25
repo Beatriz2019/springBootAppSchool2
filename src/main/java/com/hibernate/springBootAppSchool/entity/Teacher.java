@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -26,7 +27,7 @@ import javax.xml.validation.*;
 import javax.persistence.JoinColumn;
 
 @Entity
-public class Student implements Serializable{
+public class Teacher implements Serializable{
 
 	private static final long serialVersionUID = -6833167247955613395L;
 
@@ -43,34 +44,30 @@ public class Student implements Serializable{
 	@NotBlank
 	@Size(min = 5, max = 50)
 	private String firstName;
-	
 	@Column 
 	@NotBlank
 	private String lastName;
 	
 	@Column 
 	@NotBlank
-	private String birthDate;
-	
-	@Column 
-	private String Age;
-	
-	@Column 
-	@NotBlank
 	private String Phone;
 	
 	@Column 
-	private String State;
+	@NotBlank
+	private String Position;
 	
 	@Column 
-	private String Municipality;
+	@NotBlank
+	@Digits(integer=4, fraction=2)
+	private String Salary;
 	
 	@Column 
-	private String Address;
+	@NotBlank
+	private String Course;
 	
 	@Column 
-	private String RegistrationForm;
-	
+	private String ClassSchedule;
+			
 	@Column(unique = true) 
 	@NotBlank
 	@Email
@@ -80,12 +77,12 @@ public class Student implements Serializable{
 	@Column(unique = true) 
 	private String username;
 	
-	@Column
 	@NotBlank
+	@Column
 	private String password;
 	
-	@Transient 
 	@NotBlank
+	@Transient 
 	private String confirmPassword;
 	
 	/*
@@ -95,9 +92,9 @@ public class Student implements Serializable{
 		,inverseJoinColumns=@JoinColumn(name="role_id"))
 	private Set roles;
 	*/
-	public Student() {	}
+	public Teacher() {	}
 	
-	public Student(Long id) {
+	public Teacher(Long id) {
 		this.id = id;
 	}       //Getters, Setters, HashCode, Equals & ToString Functions
 }

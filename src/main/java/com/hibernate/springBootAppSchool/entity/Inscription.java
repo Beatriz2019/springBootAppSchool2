@@ -1,6 +1,7 @@
 package com.hibernate.springBootAppSchool.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -26,68 +28,63 @@ import javax.xml.validation.*;
 import javax.persistence.JoinColumn;
 
 @Entity
-public class Student implements Serializable{
+public class Inscription implements Serializable{
 
-	private static final long serialVersionUID = -6833167247955613395L;
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	@GenericGenerator(name="native",strategy="native")
+	// Id Payment
 	private Long id;
 	
 	@Column 
 	@NotBlank
-	private String CI;
+	private String TransferNumber;
 	
 	@Column
 	@NotBlank
-	@Size(min = 5, max = 50)
-	private String firstName;
-	
-	@Column 
-	@NotBlank
-	private String lastName;
-	
-	@Column 
-	@NotBlank
-	private String birthDate;
-	
-	@Column 
-	private String Age;
-	
-	@Column 
-	@NotBlank
-	private String Phone;
-	
-	@Column 
-	private String State;
-	
-	@Column 
-	private String Municipality;
-	
-	@Column 
-	private String Address;
-	
-	@Column 
-	private String RegistrationForm;
-	
-	@Column(unique = true) 
-	@NotBlank
-	@Email
-	private String email;
-	
-	@NotBlank
-	@Column(unique = true) 
-	private String username;
+	private Date date;
 	
 	@Column
-	@NotBlank
-	private String password;
+	@Size(min= 10, max = 70)
+	private String Bank;
 	
-	@Transient 
+	@Column 
 	@NotBlank
-	private String confirmPassword;
+	@Digits(integer=5, fraction=2)
+	private String TotalBs;
 	
+	@Column 
+	@NotBlank
+	@Digits(integer=5, fraction=2)
+	private String TotalDollar;
+	
+	@Column 
+	private String TypeOfCurrency;
+	
+	@Column 
+	//Valor del dólar del día de la inscripción
+	private String DollarDayValue;
+	
+	@Column 
+	@NotBlank
+	//Forma de pago
+	private String WayToPay;
+	
+	@Column 
+	@NotBlank
+	private String PdfForm;
+		
 	/*
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="user_roles"
@@ -95,9 +92,10 @@ public class Student implements Serializable{
 		,inverseJoinColumns=@JoinColumn(name="role_id"))
 	private Set roles;
 	*/
-	public Student() {	}
+	public Inscription() {	}
 	
-	public Student(Long id) {
+	public Inscription(Long id) {
 		this.id = id;
 	}       //Getters, Setters, HashCode, Equals & ToString Functions
 }
+
